@@ -157,7 +157,7 @@ ax.legend(title='Tahun')
 st.pyplot(fig)
 
 # Total tenyewaan terdaftar per jam pada hari kerja tahun 2012
-st.subheader('Total tenyewaan terdaftar per jam pada hari kerja tahun 2012')
+st.subheader('Total Penyewaan Terdaftar per Jam pada Hari Kerja')
 fig, ax = plt.subplots(figsize=(10, 7))
 
 total_reg_sorted = total_reg_perhour.sort_values(by='total_registered', ascending=False)
