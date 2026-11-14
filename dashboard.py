@@ -40,8 +40,13 @@ def sshare_byweathersit(df):
     share_byweathersit = df.groupby('weathersit')['cnt'].mean().reset_index()
     return share_byweathersit
 
+def total_reg_perhour(df):
+    total_reg_perhour = df[(df['workingday']==1) & (df['yr']==1)].groupby('hr')['registered'].sum().sort_values(ascending=False).reset_index(name='total_registered')
+    return total_reg_perhour
+
 # Menyiapkan DataFrame
 all_df = pd.read_csv("day_df.csv")
+hour_df = pd.read_csv("hour_df.csv")
 
 datetime_columns = ["dteday"]
 all_df.sort_values(by="dteday", inplace=True)
@@ -51,8 +56,8 @@ for column in datetime_columns:
     all_df[column] = pd.to_datetime(all_df[column])
 
 # Membuat Komponen Filter
-min_date = all_df["dteday"].min()
-max_date = all_df["dteday"].max()
+min_date = all_df["dteday"].min() = hour_df["dteday"].min()
+max_date = all_df["dteday"].max() = hour_df["dteday"].max()
  
 with st.sidebar:
     # Menambahkan logo perusahaan
@@ -73,6 +78,7 @@ share_report = share_report(main_df)
 weathersit_count = weathersit_count(main_df)
 cluster_summary = create_cluster(main_df)
 share_byweathersit = sshare_byweathersit(main_df)
+total_reg_perhour = total_reg_perhour(hour_df)  
 
 # Melengkapi Dashboard dengan Berbagai Visualisasi Data
 st.header('Bike Sharing Dashboard :bike:')
@@ -144,6 +150,21 @@ ax.set_xlabel('Index Cuaca')
 ax.set_ylabel('Rata-rata Penyewaan')
 ax.legend(title='Tahun')
 st.pyplot(fig)
+
+# Total peminjaman terdaftar (registered)
+fig, ax = plt.subplots(figsize=(10, 7))
+
+total_reg_sorted = total_reg_perhour.sort_values(by='total_registered', ascending=False)
+y_labels = total_reg_sorted['hr'].astype(str)
+
+bars = ax.barh(y_labels, total_reg_sorted['total_registered'], color='blue')
+ax.bar_label(bars, padding=3, rotation=0, fontsize=8)
+
+ax.invert_yaxis()
+
+ax.set_ylabel('Jam (hr)')
+ax.set_xlabel('Total peminjaman terdaftar (registered)')
+ax.set_title('Total tenyewaan terdaftar per jam pada hari kerja tahun 2012')
 
 # Menampilkan Tabel Cluster Summary
 st.subheader('Profil Data Berdasrakan Tingkat Peminjaman')
