@@ -125,4 +125,6 @@ ax.set_ylabel('Jumlah Hari')
 ax.legend(title='Tahun')
 st.pyplot(fig)
 
-# test
+# Menampilkan Tabel Cluster Summary
+st.subheader('Cluster Summary')
+st.dataframe(cluster_summary)
