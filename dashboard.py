@@ -46,7 +46,7 @@ def total_reg_perhour(df):
 
 # Menyiapkan DataFrame
 all_df = pd.read_csv("day_df.csv")
-hour_df = pd.read_csv("hour_df.csv")
+hour = pd.read_csv("hour_df.csv")
 
 datetime_columns = ["dteday"]
 all_df.sort_values(by="dteday", inplace=True)
@@ -72,6 +72,8 @@ with st.sidebar:
 
 main_df = all_df[(all_df["dteday"] >= str(start_date)) & 
                 (all_df["dteday"] <= str(end_date))]
+hour_df = hour[(hour["dteday"] >= str(start_date)) & 
+                (hour["dteday"] <= str(end_date))]
 
 ts_sewa = ts_sewa(main_df)
 share_report = share_report(main_df)
