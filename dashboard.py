@@ -27,13 +27,13 @@ def weathersit_count(df):
 def create_cluster(df):
     cluster_summary = df.groupby('category', observed=False).agg(
     jumlah_hari = ('cnt','count'),
-    rata_casual = ('casual','mean'),
-    rata_registered = ('registered','mean'),
+    rata_cnt = ('cnt','mean'),
     rata_temp = ('temp_conv','mean'),
     rata_hum = ('hum_conv','mean'),
     mode_musim = ('season_conv', lambda x: x.mode().iloc[0]),
     mode_weather = ('weathersit', lambda x: x.mode().iloc[0])).reset_index()
-    cluster_summary.columns = ['Cluster', 'Jumlah Hari', 'Rata-Rata Casual', 'Rata-Rata Registered', 'Rata-Rata Temperatur', 'Rata-Rata Humidity', 'Mode Musim', 'Mode Cuaca']
+    cluster_summary.columns = ['Cluster', 'Jumlah Hari', 'Rata-Rata Jumlah Penyewaan', 'Rata-Rata Temperatur', 'Rata-Rata Humidity', 'Mode Musim', 'Mode Cuaca']
+    cluster_summary = cluster_summary.sort_values(by='Rata-Rata Jumlah Penyewaan', ascending=False).reset_index(drop=True)
     return cluster_summary
 
 # Menyiapkan DataFrame
