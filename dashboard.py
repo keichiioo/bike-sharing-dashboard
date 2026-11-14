@@ -151,7 +151,8 @@ ax.set_ylabel('Rata-rata Penyewaan')
 ax.legend(title='Tahun')
 st.pyplot(fig)
 
-# Total peminjaman terdaftar (registered)
+# Total tenyewaan terdaftar per jam pada hari kerja tahun 2012
+st.subheader('Total tenyewaan terdaftar per jam pada hari kerja tahun 2012')
 fig, ax = plt.subplots(figsize=(10, 7))
 
 total_reg_sorted = total_reg_perhour.sort_values(by='total_registered', ascending=False)
