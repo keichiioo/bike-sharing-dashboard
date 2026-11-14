@@ -171,6 +171,7 @@ ax.invert_yaxis()
 ax.set_ylabel('Jam (hr)')
 ax.set_xlabel('Total peminjaman terdaftar (registered)')
 ax.set_title('Total penyewaan terdaftar per jam pada hari kerja tahun 2012')
+st.pyplot(fig)
 
 # Menampilkan Tabel Cluster Summary
 st.subheader('Profil Data Berdasrakan Tingkat Peminjaman')
