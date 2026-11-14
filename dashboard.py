@@ -41,7 +41,7 @@ def sshare_byweathersit(df):
     return share_byweathersit
 
 def total_reg_perhour(df):
-    total_reg_perhour = df[(df['workingday']==1) & (df['yr']==1)].groupby('hr')['registered'].sum().sort_values(ascending=False).reset_index(name='total_registered')
+    total_reg_perhour = df[(df['workingday']==1)].groupby('hr')['registered'].sum().sort_values(ascending=False).reset_index(name='total_registered')
     return total_reg_perhour
 
 # Menyiapkan DataFrame
