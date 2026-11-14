@@ -33,6 +33,7 @@ def create_cluster(df):
     rata_hum = ('hum_conv','mean'),
     mode_musim = ('season_conv', lambda x: x.mode().iloc[0]),
     mode_weather = ('weathersit', lambda x: x.mode().iloc[0])).reset_index()
+    cluster_summary.columns = ['Cluster', 'Jumlah Hari', 'Rata-Rata Casual', 'Rata-Rata Registered', 'Rata-Rata Temperatur', 'Rata-Rata Humidity', 'Mode Musim', 'Mode Cuaca']
     return cluster_summary
 
 # Menyiapkan DataFrame
