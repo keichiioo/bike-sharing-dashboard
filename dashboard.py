@@ -36,6 +36,10 @@ def create_cluster(df):
     cluster_summary = cluster_summary.sort_values(by='Rata-Rata Jumlah Penyewaan', ascending=False).reset_index(drop=True)
     return cluster_summary
 
+def sshare_byweathersit(df):
+    share_byweathersit = df.groupby('weathersit')['cnt'].mean().reset_index()
+    return share_byweathersit
+
 # Menyiapkan DataFrame
 all_df = pd.read_csv("day_df.csv")
 
@@ -68,7 +72,7 @@ ts_sewa = ts_sewa(main_df)
 share_report = share_report(main_df)
 weathersit_count = weathersit_count(main_df)
 cluster_summary = create_cluster(main_df)
-
+share_byweathersit = sshare_byweathersit(main_df)
 # Melengkapi Dashboard dengan Berbagai Visualisasi Data
 st.header('Bike Sharing Dashboard :bike:')
 
@@ -126,6 +130,20 @@ ax.set_ylabel('Jumlah Hari')
 ax.legend(title='Tahun')
 st.pyplot(fig)
 
+# Menampilkan Rata-Rata Jumlah Penyewaan Sepeda per Index Cuaca
+st.subheader('Rata-Rata Penyewaan Berdasarkan Index Cuaca')
+fig, ax = plt.subplots(figsize=(10, 6))
+ax = sns.barplot(data=share_byweathersit, x='weathersit', y='cnt')
+
+for container in ax.containers:
+    ax.bar_label(container, padding=3)
+
+ax.set_title('Rata-rata Penyewaan Berdasarkan Index Cuaca)')
+ax.set_xlabel('Index Cuaca')
+ax.set_ylabel('Rata-rata Penyewaan')
+ax.legend(title='Tahun')
+st.pyplot(fig)
+
 # Menampilkan Tabel Cluster Summary
-st.subheader('Cluster Summary')
+st.subheader('Profil Data Berdasrakan Tingkat Peminjaman')
 st.dataframe(cluster_summary)
