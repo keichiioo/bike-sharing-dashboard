@@ -56,8 +56,8 @@ for column in datetime_columns:
     all_df[column] = pd.to_datetime(all_df[column])
 
 # Membuat Komponen Filter
-min_date = all_df["dteday"].min() = hour_df["dteday"].min()
-max_date = all_df["dteday"].max() = hour_df["dteday"].max()
+min_date = all_df["dteday"].min()
+max_date = all_df["dteday"].max()
  
 with st.sidebar:
     # Menambahkan logo perusahaan
