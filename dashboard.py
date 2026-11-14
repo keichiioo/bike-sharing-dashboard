@@ -174,5 +174,5 @@ ax.set_title('Total Penyewaan Terdaftar per Jam pada Hari Kerja')
 st.pyplot(fig)
 
 # Menampilkan Tabel Cluster Summary
-st.subheader('Profil Data Berdasrakan Tingkat Peminjaman')
+st.subheader('Profil Data Berdasarakan Tingkat Peminjaman')
 st.dataframe(cluster_summary)
