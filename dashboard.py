@@ -51,9 +51,12 @@ hour = pd.read_csv("hour_df.csv")
 datetime_columns = ["dteday"]
 all_df.sort_values(by="dteday", inplace=True)
 all_df.reset_index(inplace=True)
+hour.sort_values(by="dteday", inplace=True) 
+hour.reset_index(inplace=True)
  
 for column in datetime_columns:
     all_df[column] = pd.to_datetime(all_df[column])
+    hour[column] = pd.to_datetime(hour[column])
 
 # Membuat Komponen Filter
 min_date = all_df["dteday"].min()
